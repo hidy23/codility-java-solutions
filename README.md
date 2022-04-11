@@ -1,4 +1,4 @@
-Java Codility Solutions
+Java Solutions
 =======================
 
 Codility lessons solved in Java:
