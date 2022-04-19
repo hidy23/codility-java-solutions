@@ -4,7 +4,7 @@ package programous;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class Question1 {
+public class QuickSort {
     public static void main(String[] args) {
         /*[6, 10, 2]	"6210"
 [3, 30, 34, 5, 9]	"9534330"*/
@@ -25,38 +25,36 @@ public class Question1 {
     }
 
     private static void l_pivot_sort(int[] a, int lo, int hi) {
-        ArrayList<Integer> integerArray = (ArrayList<Integer>) Arrays.stream(a).boxed().collect(Collectors.toList());
-        System.out.println(integerArray);
-        System.out.print("lo : " + lo);
-        System.out.println("hi : " + hi);
+        /*ArrayList<Integer> integerArray = (ArrayList<Integer>) Arrays.stream(a).boxed().collect(Collectors.toList());
+        System.out.println(integerArray);*/
 
         if (lo >= hi) return;
         int pivot = partition(a, lo, hi);
-        System.out.println("hi : " + hi);
 
-        l_pivot_sort(a, lo, pivot - 1);
+        l_pivot_sort(a, lo, pivot);
         l_pivot_sort(a, pivot + 1, hi);
     }
 
     private static int partition(int[] a, int left, int right) {
 
-        int lo = left;
-        int hi = right;
-        int pivot = a[left];
+        int lo = left - 1;
+        int hi = right + 1;
+        int pivot = a[(left + right) / 2];
 
-        while (lo < hi) {
-            while (a[hi] > pivot && lo < hi) {
-                hi--;
-            }
-            while (a[lo] <= pivot && lo < hi) {
+        while (true) {
+            do {
                 lo++;
-            }
+            } while (a[lo] < pivot);
+
+            do {
+                hi--;
+            } while (a[hi] > pivot && lo <= hi);
+
+            if (lo >= hi) return hi;
 
             swap(a, lo, hi);
         }
 
-
-        return lo;
     }
 
     private static void swap(int[] a, int i, int j) {
