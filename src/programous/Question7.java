@@ -1,6 +1,8 @@
 // 로또 순위
 package programous;
 
+import java.util.Arrays;
+
 public class Question7 {
     public static void main(String[] args) {
 /*
@@ -32,17 +34,15 @@ public class Question7 {
 
     public static String solution(String[] participant, String[] completion) {
         String answer = "";
-        for (int i = 0; i < participant.length; i++) {
-            for (int j = 0; j < completion.length; j++) {
-                if (participant[i].equals(completion[j])) {
-                    completion[j] = "";
-                    break;
-                } else if (j == completion.length - 1) {
-                    return participant[i];
-
-                }
-            }
+        Arrays.sort(participant);
+        Arrays.sort(completion);
+        int i;
+        for (i = 0; i < completion.length; i++) {
+            if (participant[i] != completion[i]) break;
         }
+        answer = participant[i];
+        return answer;
+
         /*for (String comple : completion) {
             participant = Arrays.stream(participant).filter(e -> e.equals(comple)).toArray(String[]::new);
         }*/
@@ -52,8 +52,6 @@ public class Question7 {
         String strCompletion = String.join("", completion);
         strParticipant.replaceAll(strCompletion, "");
         answer = strParticipant;*/
-
-        return answer;
     }
 
 }
